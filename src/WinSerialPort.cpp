@@ -88,6 +88,21 @@ WinSerialPort::open(int baud, int data, SerialPort::Parity parity, SerialPort::S
 
     if (_handle == INVALID_HANDLE_VALUE)
         return false;
+    
+    Sleep(50);   
+    CloseHandle(_handle);   // Briefly close then reopen the serial port to emulate a "double tap" and put the device into bootloader mode
+    Sleep(50);    
+
+    _handle = CreateFile(device.c_str(),
+                         GENERIC_READ | GENERIC_WRITE,
+                         0,
+                         0,
+                         OPEN_EXISTING,
+                         FILE_ATTRIBUTE_NORMAL,
+                         0);
+
+    if (_handle == INVALID_HANDLE_VALUE)
+        return false;
 
     dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
 

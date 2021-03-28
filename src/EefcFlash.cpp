@@ -31,6 +31,7 @@
 #include <assert.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <time.h>
 
 #define EEFC_KEY        0x5a
 
@@ -313,6 +314,9 @@ EefcFlash::waitFSR(int seconds)
     int tries = seconds * 1000;
     uint32_t fsr0;
     uint32_t fsr1 = 0x1;
+    timespec tim, tim2;
+    tim.tv_sec = 1;
+    tim.tv_nsec = 0;
 
     while (tries-- > 0)
     {
@@ -332,7 +336,7 @@ EefcFlash::waitFSR(int seconds)
         }
         if (fsr0 & fsr1 & 0x1)
             break;
-        usleep(1000);
+        nanosleep(&tim, &tim2);
     }
     if (tries == 0)
         throw FlashTimeoutError();
