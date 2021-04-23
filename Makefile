@@ -26,9 +26,12 @@ RESDIR=res
 INSTALLDIR=install
 
 #
-# Determine OS
+# Determine OS and version
 #
 OS:=$(shell uname -s | cut -c -7)
+HOST?=$(OS)
+PACKAGE_NAME=bossac
+PACKAGE_VERSION?=fortytwo-1.0.0
 
 #
 # Windows rules
@@ -218,10 +221,33 @@ BOSSAC_LIBS=$(COMMON_LIBS)
 BOSSASH_LIBS=-lreadline $(COMMON_LIBS)
 
 #
+# packaging specific
+#
+ifeq (postpackaging,$(findstring $(MAKECMDGOALS),postpackaging))
+  PACKAGE_FILENAME=$(PACKAGE_NAME)-$(PACKAGE_VERSION)-$(HOST).tar.bz2
+  PACKAGE_CHKSUM := $(firstword $(shell shasum -a 256 "$(PACKAGE_FILENAME)"))
+  PACKAGE_SIZE := $(firstword $(shell wc -c "$(PACKAGE_FILENAME)"))
+endif
+
+#
 # Main targets
 #
 all: $(BINDIR)/bossa$(EXE) $(BINDIR)/bossac$(EXE) $(BINDIR)/bossash$(EXE)
 bossac: $(BINDIR)/bossac$(EXE)
+arduino: clean bossac
+	@echo "Packaging module."
+	cp $(BINDIR)/bossac$(EXE) bossac$(EXE)
+	tar -cf "$(PACKAGE_NAME)-$(PACKAGE_VERSION)-$(HOST).tar" "bossac$(EXE)"
+	bzip2 "$(PACKAGE_NAME)-$(PACKAGE_VERSION)-$(HOST).tar"
+	-$(RM) bossac$(EXE)
+	$(MAKE) --no-builtin-rules postpackaging -C .
+postpackaging:
+	@echo "PACKAGE_CHKSUM      	= $(PACKAGE_CHKSUM)"
+	@echo "PACKAGE_SIZE        	= $(PACKAGE_SIZE)"
+	@echo "PACKAGE_FILENAME    	= $(PACKAGE_FILENAME)"
+	@echo "PACKAGE_HOST 	  	= $(HOST)"
+	cat extras/package_index.json.template | sed s/%%VERSION%%/$(PACKAGE_VERSION)/ | sed s/%%FILENAME%%/$(PACKAGE_FILENAME)/ | sed s/%%CHECKSUM%%/$(PACKAGE_CHKSUM)/ | sed s/%%SIZE%%/$(PACKAGE_SIZE)/ | sed s/%%HOST%%/$(HOST)/ > package_$(PACKAGE_NAME)_$(PACKAGE_VERSION)_$(HOST)_index.json
+	@echo "package_$(PACKAGE_NAME)_$(PACKAGE_VERSION)_$(HOST)_index.json created"
 
 #
 # Common rules
@@ -341,6 +367,8 @@ strip: strip-bossa strip-bossac strip-bossash
 clean:
 	@echo CLEAN
 	$(Q)rm -rf $(BINDIR) $(OBJDIR)
+	-$(RM) $(PACKAGE_NAME)-*.tar $(PACKAGE_NAME)-*.tar.bz2 package_$(PACKAGE_NAME)_*.json
+
 
 #
 # Include dependencies

@@ -10,3 +10,7 @@ tags
 *.bak
 install/*.crt
 install/*.p12
+
+package_bossac_*_*_index.json
+*.tar
+*.tar.bz2

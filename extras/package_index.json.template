@@ -1,0 +1,14 @@
+{
+    "name": "bossac",
+    "version": "%%VERSION%%",
+    "systems":
+    [
+        {
+        "host": "%%HOST%%",
+        "url": "https://github.com/fortytwosystems/ArduinoModule-CMSIS/releases/download/v%%VERSION%%/%%FILENAME%%",
+        "archiveFileName": "%%FILENAME%%",
+        "checksum": "SHA-256:%%CHECKSUM%%",
+        "size": "%%SIZE%%"
+        }
+    ]
+}
