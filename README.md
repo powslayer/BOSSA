@@ -1,5 +1,5 @@
-BOSSA fortytwo-1.0.0
---------------------
+BOSSA 1.9.1-fortytwo-0
+----------------------
 
 BOSSA is a flash programming utility for Atmel's SAM family of flash-based ARM microcontrollers.
 The motivation behind BOSSA is to create a simple, easy-to-use, open source utility to replace Atmel's SAM-BA software.

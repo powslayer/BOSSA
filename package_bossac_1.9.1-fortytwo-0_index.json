@@ -1,0 +1,14 @@
+{
+    "name": "bossac",
+    "version": "1.9.1-fortytwo-0",
+    "systems":
+    [
+        {
+        "host": "i686-mingw32",
+        "url": "https://github.com/fortytwosystems/ArduinoModule-CMSIS/releases/download/v1.9.1-fortytwo-0/bossac-1.9.1-fortytwo-0-i686-mingw32.tar.bz2",
+        "archiveFileName": "bossac-1.9.1-fortytwo-0-i686-mingw32.tar.bz2",
+        "checksum": "SHA-256:74ec41a2d79e7b95faf8b142bdbbf81ced8348492bbf4e2fb59757dcddd104a4",
+        "size": "736069"
+        }
+    ]
+}

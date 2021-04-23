@@ -31,7 +31,7 @@ INSTALLDIR=install
 OS:=$(shell uname -s | cut -c -7)
 HOST?=$(OS)
 PACKAGE_NAME=bossac
-PACKAGE_VERSION?=fortytwo-1.0.0
+PACKAGE_VERSION?=1.9.1-fortytwo-0
 
 #
 # Windows rules
@@ -367,7 +367,7 @@ strip: strip-bossa strip-bossac strip-bossash
 clean:
 	@echo CLEAN
 	$(Q)rm -rf $(BINDIR) $(OBJDIR)
-	-$(RM) $(PACKAGE_NAME)-*.tar $(PACKAGE_NAME)-*.tar.bz2 package_$(PACKAGE_NAME)_*.json
+	-$(RM) $(PACKAGE_NAME)-*.tar $(PACKAGE_NAME)-*.tar.bz2 package_$(PACKAGE_NAME)_*_*_index.json
 
 
 #
