@@ -236,8 +236,9 @@ all: $(BINDIR)/bossa$(EXE) $(BINDIR)/bossac$(EXE) $(BINDIR)/bossash$(EXE)
 bossac: $(BINDIR)/bossac$(EXE)
 arduino: clean bossac
 	@echo "Packaging module."
-	cp $(BINDIR)/bossac$(EXE) bossac$(EXE)
-	tar -cf "$(PACKAGE_NAME)-$(PACKAGE_VERSION)-$(HOST).tar" "bossac$(EXE)"
+	mkdir $(PACKAGE_NAME)-$(PACKAGE_VERSION)
+	cp $(BINDIR)/bossac$(EXE) $(PACKAGE_NAME)-$(PACKAGE_VERSION)/bossac$(EXE)
+	tar -cf "$(PACKAGE_NAME)-$(PACKAGE_VERSION)-$(HOST).tar" "$(PACKAGE_NAME)-$(PACKAGE_VERSION)/bossac$(EXE)"
 	bzip2 "$(PACKAGE_NAME)-$(PACKAGE_VERSION)-$(HOST).tar"
 	-$(RM) bossac$(EXE)
 	$(MAKE) --no-builtin-rules postpackaging -C .
@@ -366,7 +367,7 @@ strip: strip-bossa strip-bossac strip-bossash
 
 clean:
 	@echo CLEAN
-	$(Q)rm -rf $(BINDIR) $(OBJDIR)
+	$(Q)rm -rf $(BINDIR) $(OBJDIR) $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 	-$(RM) $(PACKAGE_NAME)-*.tar $(PACKAGE_NAME)-*.tar.bz2 package_$(PACKAGE_NAME)_*_*_index.json
 
 
