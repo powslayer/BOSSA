@@ -5,7 +5,7 @@
     [
         {
         "host": "%%HOST%%",
-        "url": "https://github.com/fortytwosystems/ArduinoModule-CMSIS/releases/download/v%%VERSION%%/%%FILENAME%%",
+        "url": "https://github.com/fortytwosystems/BOSSA/releases/download/v%%VERSION%%/%%FILENAME%%",
         "archiveFileName": "%%FILENAME%%",
         "checksum": "SHA-256:%%CHECKSUM%%",
         "size": "%%SIZE%%"
