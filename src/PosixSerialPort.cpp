@@ -36,6 +36,8 @@
 #include <termios.h>
 #include <errno.h>
 #include <sys/ioctl.h>
+#include <chrono>
+#include <thread>
 
 #include <string>
 
@@ -78,9 +80,11 @@ PosixSerialPort::open(int baud,
             return false;
     }
 
-    sleep(0.1);
+    std::chrono::milliseconds dura( 100 );
+    
+    std::this_thread::sleep_for(dura);
     close();
-    sleep(0.1);
+    std::this_thread::sleep_for(dura);
 
     _devfd = ::open(_name.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
     if (_devfd == -1)
