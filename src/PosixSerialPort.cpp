@@ -78,6 +78,20 @@ PosixSerialPort::open(int baud,
             return false;
     }
 
+    sleep(0.1);
+    close();
+    sleep(0.1);
+
+    _devfd = ::open(_name.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
+    if (_devfd == -1)
+    {
+        std::string dev("/dev/");
+        dev += _name;
+        _devfd = ::open(dev.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
+        if (_devfd == -1)
+            return false;
+    }
+
     if (tcgetattr(_devfd, &options) == -1)
     {
         close();

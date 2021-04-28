@@ -21,8 +21,8 @@
         "host": "arm-linux-gnueabihf",
         "url": "https://github.com/fortytwosystems/BOSSA/releases/download/v1.9.1-fortytwo-0/bossac-1.9.1-fortytwo-0-arm-linux-gnueabihf.tar.bz2",
         "archiveFileName": "bossac-1.9.1-fortytwo-0-arm-linux-gnueabihf.tar.bz2",
-        "checksum": "SHA-256:c1db274d9e4bc9d4bddf0838c5f5cd535a9f9d2f135af2d56988ffae6b62523a",
-        "size": "526241"
+        "checksum": "SHA-256:a1b3e20662d9a3463fc1d4438b3e1c4128fe7c5ae58f50ec12e8c2c9fa442a3d",
+        "size": "527350"
         }
     ]
 }
