@@ -16,7 +16,7 @@
         "archiveFileName": "bossac-1.9.1-fortytwo-0-x86_64-apple-darwin.tar.bz2",
         "checksum": "SHA-256:a71d4d38f8786ef260e7b067a7875dc9daabd5530a99cfe22838c31ace30336f",
         "size": "47254"
-        }
+        },
         {
         "host": "arm-linux-gnueabihf",
         "url": "https://github.com/fortytwosystems/BOSSA/releases/download/v1.9.1-fortytwo-0/bossac-1.9.1-fortytwo-0-arm-linux-gnueabihf.tar.bz2",
